@@ -1,0 +1,14 @@
+{
+  "name": "techbookfest07-puppeteer-samples",
+  "description": "技術書典7に出典した「」という書籍の「Puppeteerを使ったE2Eテストの始め方」のサンプルコード集",
+  "private": true,
+  "version": "1.0.0",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:tokuda109/techbookfest07-puppeteer-samples.git"
+  },
+  "dependencies": {
+    "puppeteer": "^1.19.0"
+  }
+}
