@@ -4,15 +4,9 @@ const puppeteer = require('puppeteer');
   const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
 
-  try {
-    await page.goto('http://localhost:8080');
+  await page.goto('http://localhost:8080');
 
-    await page.waitForSelector('title');
-
-    console.log(`ページのタイトルは「${await page.title()}」です。`);
-  } catch (e) {
-    console.error('テスト用サイトは起動していますか?');
-  }
+  console.log(`ページのタイトルは「${await page.title()}」です。`);
 
   setTimeout(async () => {
     await browser.close();

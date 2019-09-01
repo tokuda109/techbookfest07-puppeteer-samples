@@ -4,18 +4,15 @@ const puppeteer = require('puppeteer');
   const browser = await puppeteer.launch({ headless: false, slowMo: 250 });
   const page = await browser.newPage();
 
-  try {
-    await page.goto('http://localhost:8080');
-  } catch (e) {
-    console.error('テスト用サイトは起動していますか?');
-  }
+  await page.goto('http://localhost:8080');
 
-  await page.waitForSelector('.VueCarousel');
+  await page.waitForSelector('.article-preview:nth-child(1) .ion-heart');
 
-  await page.mouse.move(150, 300);
-  await page.mouse.down();
-  await page.mouse.move(100, 300);
-  await page.mouse.up();
+  const el2 = await page.$('.article-preview:nth-child(1) .ion-heart');
+
+  const rect = await el2.boundingBox();
+
+  await page.mouse.move(rect.x, rect.y);
 
   setTimeout(async () => {
     await browser.close();

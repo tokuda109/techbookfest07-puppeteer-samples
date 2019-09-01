@@ -2,17 +2,21 @@ const puppeteer = require('puppeteer');
 
 (async () => {
   const browser = await puppeteer.launch();
-  const page = await browser.newPage();
 
-  try {
-    await page.goto('http://localhost:8080');
+  const defaultContext = browser.defaultBrowserContext();
 
-    await page.waitForSelector('title');
+  console.log(
+    `デフォルトのブラウザコンテキストはシークレットモード?: ` +
+    defaultContext.isIncognito()
+  );
 
-    console.log(`ページのタイトルは「${await page.title()}」です。`);
-  } catch (e) {
-    console.error('テスト用サイトは起動していますか?');
-  }
+  const newContext = await browser.createIncognitoBrowserContext();
 
+  console.log(
+    `新しいブラウザコンテキストはシークレットモード?: ` +
+    newContext.isIncognito()
+  );
+
+  await newContext.close();
   await browser.close();
 })();

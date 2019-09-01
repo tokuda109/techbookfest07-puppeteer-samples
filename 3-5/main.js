@@ -5,7 +5,6 @@ const puppeteer = require('puppeteer');
   const page = await browser.newPage();
 
   await page.goto('http://localhost:8080');
-  await page.waitForSelector('title');
 
   console.log(`ページのタイトルは「${await page.title()}」です。`);
 
