@@ -2,23 +2,22 @@ const puppeteer = require('puppeteer');
 
 jest.setTimeout(30 * 1000);
 
-describe('会員登録', () => {
-  it('Signup画面でユーザー登録し、ヘッダーがログイン状態に変化しているか', async () => {
+describe('記事投稿画面', () => {
+  it('ログインして、記事投稿画面から記事投稿できるか', async () => {
     const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
 
-    await page.goto('http://localhost:8080/#/login');
-
     // ↓↓↓  作成したユーザーの情報  ↓↓↓
-    const username = 'username+01';
-    const email = 'username+01@gmail.com';
-    const password = 'password';
+    const username = '';
+    const email = '';
+    const password = '';
 
     const postTitle = 'Test';
     const postSummary = 'Test summary';
     const postBody = 'Test body';
     const postTags = 'test';
 
+    await page.goto('http://localhost:8080/#/login');
     await page.waitForSelector('form');
 
     await page.focus('form .form-group:nth-child(1) [type="text"]');
@@ -35,7 +34,6 @@ describe('会員登録', () => {
     });
 
     await page.click('.navbar .nav-item:nth-child(2) a');
-
     await page.waitForSelector('form');
 
     await page.focus('form .form-group:nth-child(1) [type="text"]');
@@ -61,6 +59,8 @@ describe('会員登録', () => {
       text: postBody
     });
 
-    browser.close();
+    await setTimeout(async () => {
+      await browser.close();
+    }, 3000);
   });
 });
