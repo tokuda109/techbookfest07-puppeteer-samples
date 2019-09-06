@@ -1,18 +1,21 @@
 const puppeteer = require('puppeteer');
 
 (async () => {
-  const browser = await puppeteer.launch({ headless: false, slowMo: 250 });
+  const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
 
-  await page.goto('http://localhost:8080');
+  await page.goto('http://localhost:8080/#/register');
 
-  await page.waitForSelector('.article-preview:nth-child(1) .ion-heart');
+  await page.waitForSelector('form');
 
-  const el2 = await page.$('.article-preview:nth-child(1) .ion-heart');
+  await page.focus('form .form-group:nth-child(1) [type="text"]');
+  await page.keyboard.type('Username', { delay: 100 });
 
-  const rect = await el2.boundingBox();
+  await page.focus('form .form-group:nth-child(2) [type="text"]');
+  await page.keyboard.type('email@sample.com', { delay: 100 });
 
-  await page.mouse.move(rect.x, rect.y);
+  await page.focus('form .form-group:nth-child(3) [type="password"]');
+  await page.keyboard.type('password', { delay: 100 });
 
   setTimeout(async () => {
     await browser.close();
