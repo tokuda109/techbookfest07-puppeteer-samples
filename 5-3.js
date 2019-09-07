@@ -55,7 +55,7 @@ describe('記事投稿画面', () => {
     await expect(page).toMatchElement('#app > div > div.banner > div > h1', {
       text: postTitle
     });
-    await expect(page).toMatchElement('#app > div > div.container.page > div.row.article-content > div > div > p', {
+    await expect(page).toMatchElement('#app .container > .article-content p', {
       text: postBody
     });
 
